@@ -34,7 +34,11 @@ class Cell
       if empty?
         @fired_upon ? "M" : "."
       else
-        show_ship ? "S" : "."
+        if @fired_upon
+          @ship.sunk? ? "X" : "H"
+        else
+          show_ship ? "S" : "."
+        end
       end
   end
 end

@@ -58,5 +58,10 @@ class CellTest < Minitest::Test
     cell_2.place_ship(cruiser)
     cell_2.fire_upon
     assert_equal "H", cell_2.render
+    refute cruiser.sunk?
+    cruiser.hit
+    cruiser.hit
+    assert cruiser.sunk?
+    assert_equal "X", cell_2.render
   end
 end

@@ -24,7 +24,11 @@ class Cell
 
   def fire_upon
     @ship.hit
-    @fired_upon = true  
+    @fired_upon = true
+  end
+
+  def render
+    "."
   end
 
 end

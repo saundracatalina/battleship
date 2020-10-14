@@ -30,14 +30,11 @@ class Cell
     end
   end
 
-  def render
+  def render(show_ship = false)
       if empty?
-        if @fired_upon
-          "M"
-        else
-          "."
-        end
+        @fired_upon ? "M" : "."
+      else
+        show_ship ? "S" : "."
       end
   end
-
 end

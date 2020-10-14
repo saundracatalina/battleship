@@ -1,3 +1,4 @@
+require 'pry'
 class Cell
   attr_reader :coordinate, :ship
   def initialize(coordinate)
@@ -23,12 +24,20 @@ class Cell
   end
 
   def fire_upon
-    @ship.hit
     @fired_upon = true
+    if @ship.class == Ship
+      @ship.hit
+    end
   end
 
   def render
-    "."
+      if empty?
+        if @fired_upon
+          "M"
+        else
+          "."
+        end
+      end
   end
 
 end

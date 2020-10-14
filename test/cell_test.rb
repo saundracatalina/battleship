@@ -33,9 +33,14 @@ class CellTest < Minitest::Test
     assert cell.fired_upon?
   end
 
-  def test_cell_has_not_been_fired_upon
+  def test_unfired_upon_empty_cell_can_render
     cell_1 = Cell.new("B4")
     assert_equal ".", cell_1.render
   end
 
+  def test_fired_upon_empty_cell_can_render
+    cell_1 = Cell.new("B4")
+    cell_1.fire_upon
+    assert_equal "M", cell_1.render
+  end
 end

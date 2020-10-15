@@ -33,7 +33,9 @@ class Board
     cell_coord
   end
 
-
+  def valid_coordinate?(coord)
+    @cells.keys.include?(coord)
+  end
 
 
 end

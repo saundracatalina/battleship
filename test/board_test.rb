@@ -10,11 +10,15 @@ class BoardTest < Minitest::Test
     assert_instance_of Board, board
   end
 
-  def test_can_make_column_coordiantes
+  def test_board_make_column_coordinates
     board = Board.new
     assert_equal [1, 2, 3, 4], board.columns
   end
 
+  def test_board_make_rows_coordinates
+    board = Board.new
+    assert_equal ["A", "B", "C", "D"], board.rows 
+  end
 
 end
 

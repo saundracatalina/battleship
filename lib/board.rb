@@ -1,8 +1,18 @@
 require './lib/cell'
 
 class Board
+  attr_reader :cells
 
   def initialize
+    @cells = generate_cells
+  end
+
+  def generate_cells
+    hash = {}
+    cell_coordinates.each do |cell_coord|
+      hash[cell_coord] = Cell.new(cell_coord)
+    end
+    hash
   end
 
   def columns
@@ -22,6 +32,8 @@ class Board
     end
     cell_coord
   end
+
+
 
 
 end

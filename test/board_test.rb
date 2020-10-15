@@ -25,4 +25,14 @@ class BoardTest < Minitest::Test
     expected = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
     assert_equal expected , board.cell_coordinates
   end
+
+  def test_baord_has_attribute
+      board = Board.new
+
+      board.cell_coordinates.each do |cell_coord|
+        Cell == Cell.new(cell_coord).class
+      end
+      assert_equal 16, board.cells.keys.count
+      assert_equal 16, board.cells.values.count
+  end
 end

@@ -37,26 +37,12 @@ class Board
     @cells.keys.include?(coord)
   end
 
-  def valid_placement(ship, placement_range)
-    #1. could then make a && with all helper methods. (2)
-    helper_method1?
-    helper_method2?
-    helper_method3?
-    helper_method4?
-    #2.
-    helper_method1? && helper_method2? && helper_method3? && helper_method4?
+  def valid_placement?(ship, placement_range)
+    valid_length?(ship, placement_range)
   end
-  def helper_method1?
-    conditionA
-  end
-  def helper_method2?
-    conditionB
-  end
-  def helper_method3?
-    conditionC
-  end
-  def helper_method4?
-    conditionD
+
+  def valid_length?(ship, placement_range)
+    ship.length == placement_range.length 
   end
 
 

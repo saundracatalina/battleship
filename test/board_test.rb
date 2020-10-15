@@ -17,13 +17,12 @@ class BoardTest < Minitest::Test
 
   def test_board_make_rows_coordinates
     board = Board.new
-    assert_equal ["A", "B", "C", "D"], board.rows 
+    assert_equal ["A", "B", "C", "D"], board.rows
   end
 
+  def test_board_can_make_call_coordinates
+    board = Board.new
+    expected = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+    assert_equal expected , board.cell_coordinates
+  end
 end
-
-
-# def test_coordinate_collection_has_4x4_coordinates
-#   expected = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
-#   assert_equal expected , board.cell_coordinates
-# end

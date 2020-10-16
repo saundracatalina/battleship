@@ -52,4 +52,20 @@ class BoardTest < Minitest::Test
     refute board.valid_placement?(cruiser, ["A1", "A2"])
     refute board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
+
+  def test_placement_numbers_are_consec
+    cruiser = Ship.new("Cruiser", 3)
+    board = Board.new
+
+    refute board.num_consec?(cruiser, ["A1", "A2", "A4"])
+    refute board.num_consec?(cruiser, ["A3", "A2", "A1"])
+  end
+
+  def test_placement_letters_are_consec
+    submarine = Ship.new("Submarine", 2)
+    board = Board.new
+
+    refute board.letter_consec?(submarine, ["A1", "C1"])
+    refute board.letter_consec?(submarine, ["C1", "B1"])
+  end
 end

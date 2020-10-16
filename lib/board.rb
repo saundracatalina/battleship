@@ -96,6 +96,7 @@ class Board
     user_letters(ship, placement_range).all?(user_letters(ship, placement_range)[0])
   end
 
+
   def not_diagonal?(ship, placement_range)
     horizontal_placement(ship, placement_range) || vertical_placement(ship, placement_range)
   end

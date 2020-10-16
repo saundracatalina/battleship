@@ -36,11 +36,21 @@ class Board
 #End: Generate board
 #Start: Valid placement
   def valid_placement?(ship, placement_range)
-    valid_length?(ship, placement_range)
+    valid_length?(ship, placement_range) &&
+    not_diagonal?(ship, placement_range) &&
+    all_coordinates_valid?(ship, placement_range)
+    # vertical_placement(ship, placement_range)
+    # horizontal_placement(ship, placement_range)
   end
 
   def valid_length?(ship, placement_range)
     ship.length == placement_range.length
+  end
+
+  def all_coordinates_valid?(ship, placement_range)
+    placement_range.all? do |coord|
+      @cells.keys.include?(coord)
+    end
   end
 # to go in valid_placement?(ship, placement_range) ?
   def valid_coordinate?(coord)
@@ -86,16 +96,16 @@ class Board
     user_letters(ship, placement_range).all?(user_letters(ship, placement_range)[0])
   end
 
+  def not_diagonal?(ship, placement_range)
+    horizontal_placement(ship, placement_range) || vertical_placement(ship, placement_range)
+  end
+
   def vertical_placement(ship, placement_range)
     identical_num(ship, placement_range) && letter_consec?(ship, placement_range)
   end
 
   def horizontal_placement(ship, placement_range)
     identical_letter(ship, placement_range) && num_consec?(ship, placement_range)
-  end
-
-  def not_diagonal?(ship, placement_range)
-    horizontal_placement(ship, placement_range) || vertical_placement(ship, placement_range)
   end
 
 end

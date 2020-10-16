@@ -1,4 +1,3 @@
-require 'pry'
 class Cell
   attr_reader :coordinate, :ship
   def initialize(coordinate)
@@ -8,11 +7,7 @@ class Cell
   end
 
   def empty?
-    if @ship == nil
-      true
-    else
-      false
-    end
+    @ship == nil
   end
 
   def place_ship(ship)

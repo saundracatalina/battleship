@@ -67,7 +67,7 @@ class Board
   end
 # letter.ord to num array
   def letters_to_num(ship, placement_range)
-    user_letters(ship ,placement_range).map do |letter|
+    user_letters(ship, placement_range).map do |letter|
       letter.ord
     end
   end
@@ -76,6 +76,26 @@ class Board
     placement_range.map do |coordinate|
       coordinate[0]
     end
+  end
+# all num's are equal in user num array
+  def identical_num(ship, placement_range)
+    user_numbers(ship, placement_range).all?(user_numbers(ship, placement_range)[0])
+  end
+  # all letters are equal in user letter array
+  def identical_letter(ship, placement_range)
+    user_letters(ship, placement_range).all?(user_letters(ship, placement_range)[0])
+  end
+
+  def vertical_placement(ship, placement_range)
+    identical_num(ship, placement_range) && letter_consec?(ship, placement_range)
+  end
+
+  def horizontal_placement(ship, placement_range)
+    identical_letter(ship, placement_range) && num_consec?(ship, placement_range)
+  end
+
+  def not_diagonal?(ship, placement_range)
+    horizontal_placement(ship, placement_range) || vertical_placement(ship, placement_range)
   end
 
 end

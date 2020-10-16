@@ -68,4 +68,13 @@ class BoardTest < Minitest::Test
     refute board.letter_consec?(submarine, ["A1", "C1"])
     refute board.letter_consec?(submarine, ["C1", "B1"])
   end
+
+  def test_board_will_not_place_diagonal_placements
+    cruiser = Ship.new("Cruiser", 3)
+    submarine = Ship.new("Submarine", 2)
+    board = Board.new
+    # refute board.identical_letter(submarine, ["C3", "D3"])
+    refute board.not_diagonal?(cruiser, ["A1", "B2", "C3"])
+    refute board.not_diagonal?(submarine, ["C2", "D3"])
+  end
 end

@@ -77,7 +77,8 @@ class BoardTest < Minitest::Test
     refute board.not_diagonal?(cruiser, ["A1", "B2", "C3"])
     refute board.not_diagonal?(submarine, ["C2", "D3"])
   end
-
+# also need to test the cells are empty. (2)
+# test cells are on board (1)
   def test_baord_can_validate_placements
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -93,5 +94,9 @@ class BoardTest < Minitest::Test
     refute board.valid_placement?(submarine, ["C2", "D3"])
     assert board.valid_placement?(submarine, ["A1", "A2"])
     assert board.valid_placement?(cruiser, ["B1", "C1", "D1"])
+    refute board.valid_placement?(submarine, ["A2", "A5"])
+    refute board.valid_placement?(submarine, ["Z2", "E2"])
+    refute board.valid_placement?(cruiser, ["A3", "A4", "A5"])
+    refute board.valid_placement?(cruiser, ["C2", "D2", "E2"])
   end
 end

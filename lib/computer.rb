@@ -14,4 +14,7 @@ class Computer
     ships << Ship.new("Submarine", 2)
     ships
   end
+
+
+
 end

@@ -38,9 +38,8 @@ class Board
   def valid_placement?(ship, placement_range)
     valid_length?(ship, placement_range) &&
     not_diagonal?(ship, placement_range) &&
-    all_coordinates_valid?(ship, placement_range)
-    # vertical_placement(ship, placement_range)
-    # horizontal_placement(ship, placement_range)
+    all_coordinates_valid?(ship, placement_range) &&
+    cell_empty?(ship, placement_range)
   end
 
   def valid_length?(ship, placement_range)
@@ -58,7 +57,6 @@ class Board
   end
 # defines range array to compare original to.
   def user_range(set)
-    # require "pry"; binding.pry
     (set.min..set.max).to_a
   end
 # validates num's are consec
@@ -96,7 +94,6 @@ class Board
     user_letters(ship, placement_range).all?(user_letters(ship, placement_range)[0])
   end
 
-
   def not_diagonal?(ship, placement_range)
     horizontal_placement(ship, placement_range) || vertical_placement(ship, placement_range)
   end
@@ -107,6 +104,20 @@ class Board
 
   def horizontal_placement(ship, placement_range)
     identical_letter(ship, placement_range) && num_consec?(ship, placement_range)
+  end
+
+  def place(ship, placement_range)
+    @cells.each do |coordinate, cell_obj|
+      if placement_range.include?(coordinate)
+        cell_obj.place_ship(ship)
+      end
+    end
+  end
+
+  def cell_empty?(ship, placement_range)
+    placement_range.all? do |coord|
+      @cells[coord].empty?
+    end
   end
 
 end

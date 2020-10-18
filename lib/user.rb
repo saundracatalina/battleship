@@ -8,6 +8,11 @@ class User
     @board = Board.new
   end
 
-
+  def make_ships
+    ships = []
+    ships << Ship.new("Cruiser", 3)
+    ships << Ship.new("Submarine", 2)
+    ships
+  end
 
 end

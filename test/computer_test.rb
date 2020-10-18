@@ -79,8 +79,20 @@ class ComputerTest < Minitest::Test
     ["A2", "B2", "C2"], ["A3", "B3", "C3"], ["A4", "B4", "C4"],
     ["B1", "C1", "D1"], ["B2", "C2", "D2"], ["B3", "C3", "D3"],
     ["B4", "C4", "D4"]]
-    
+
     assert expected.include?(computer.random_placement(ship1))
+  end
+
+  def test_computer_can_place_ships
+    computer = Computer.new
+    computer.place_ships
+
+    expected = 0
+    computer.board.cells.values.each do |cell|
+      expected += 1 if cell.ship != nil
+    end
+
+    assert_equal 5, expected
   end
 
 end

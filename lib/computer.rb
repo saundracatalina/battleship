@@ -62,4 +62,17 @@ class Computer
     possible_vertical_placements
   end
 
+  def place_ships
+    @ships.each do |ship|
+      valid_placement = false
+      until valid_placement == true
+        proposed_placement = random_placement(ship)
+        if @board.valid_placement?(ship, proposed_placement)
+          valid_placement =  true
+          @board.place(ship, proposed_placement)
+        end
+      end
+    end
+  end
+
 end

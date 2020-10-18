@@ -15,6 +15,10 @@ class Computer
     ships
   end
 
+  def random_placement(ship)
+    horizontal_and_vertical_placements(ship).sample
+  end
+
   def horizontal_and_vertical_placements(ship)
     generate_ship_coordinate_placement_horizontal(ship) +
     generate_ship_coordinate_placement_vertical(ship)

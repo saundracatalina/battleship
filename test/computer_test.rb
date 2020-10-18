@@ -79,7 +79,7 @@ class ComputerTest < Minitest::Test
     ["A2", "B2", "C2"], ["A3", "B3", "C3"], ["A4", "B4", "C4"],
     ["B1", "C1", "D1"], ["B2", "C2", "D2"], ["B3", "C3", "D3"],
     ["B4", "C4", "D4"]]
-    # require "pry"; binding.pry
+    
     assert expected.include?(computer.random_placement(ship1))
   end
 

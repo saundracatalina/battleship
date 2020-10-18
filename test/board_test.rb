@@ -73,12 +73,11 @@ class BoardTest < Minitest::Test
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
     board = Board.new
-    # refute board.identical_letter(submarine, ["C3", "D3"])
+    refute board.identical_letter(submarine, ["C3", "D3"])
     refute board.not_diagonal?(cruiser, ["A1", "B2", "C3"])
     refute board.not_diagonal?(submarine, ["C2", "D3"])
   end
-# also need to test the cells are empty. (2)
-# test cells are on board (1)
+
   def test_baord_can_validate_placements
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -113,5 +112,14 @@ class BoardTest < Minitest::Test
     assert_equal cruiser, cell_2.ship
     assert_equal cruiser, cell_3.ship
     assert cell_3.ship == cell_2.ship
+  end
+
+  def test_board_will_not_place_over_lapping_ships
+    board = Board.new
+    cruiser = Ship.new("Cruiser", 3)
+    board.place(cruiser, ["A1", "A2", "A3"])
+    submarine = Ship.new("Submarine", 2)
+
+    assert_equal false, board.valid_placement?(submarine, ["A1", "B1"])
   end
 end

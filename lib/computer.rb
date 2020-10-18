@@ -32,4 +32,25 @@ class Computer
     possible_horizontal_placements
   end
 
+  def generate_ship_coordinate_placement_vertical(ship)
+    possible_letter_placements  = Array.new
+    (1..4).each_cons(ship.length) do |consec_nums|
+      consec_letter_placement = consec_nums.map do |num|
+        (num + 64).chr
+      end
+      possible_letter_placements << consec_letter_placement
+      # possible_letter_placements = [["A", "B", "C"], ["B", "C", "D"]]
+    end
+
+    possible_vertical_placements = Array.new
+    possible_letter_placements.each do |letter_placement|
+      (1..4).each do |num|
+        possible_vertical_placements  << letter_placement.map do |cap_letter|
+          cap_letter + num.to_s
+        end
+      end
+    end
+    possible_vertical_placements
+  end
+
 end

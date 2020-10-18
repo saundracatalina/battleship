@@ -111,7 +111,7 @@ class Board
         cell_obj.place_ship(ship)
       end
     end
-
   end
+
 
 end

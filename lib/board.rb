@@ -107,10 +107,8 @@ class Board
   end
 
   def place(ship, placement_range)
-    @cells.each do |coordinate, cell_obj|
-      if placement_range.include?(coordinate)
-        cell_obj.place_ship(ship)
-      end
+    placement_range.each do |coord|
+      @cells[coord].place_ship(ship)
     end
   end
 

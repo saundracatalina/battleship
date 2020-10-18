@@ -2,13 +2,16 @@ require './lib/ship'
 require './lib/board'
 
 class Computer
-#   attr_reader :ships
-#   def initialize(argument)
-#     @ships = [ship1, ship2]
-# @board =
-#   end
+  attr_reader :ships, :board
+  def initialize
+    @ships = make_ships
+    @board = Board.new
+  end
 # #makes and assigs ships
-#   def that_makes_ships
-#     #ships now in array
-#   end
+  def make_ships
+    ships = []
+    ships << Ship.new("Cruiser", 3)
+    ships << Ship.new("Submarine", 2)
+    ships
+  end
 end

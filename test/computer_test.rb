@@ -17,13 +17,13 @@ class ComputerTest < Minitest::Test
     assert Board, computer.board.class
   end
 
-  def computer_can_make_ships
+  def test_computer_can_make_ships
     computer = Computer.new
     computer.ships.each do |ship|
       assert Ship, ship.class
     end
-    assert_equal "Submarine", ships[1].name
-    assert_equal "Cruiser", ships[0].name
+    assert_equal "Submarine", computer.ships[1].name
+    assert_equal "Cruiser", computer.ships[0].name
   end
 
   def test_computer_can_generate_possible_horizontal_ship_placement

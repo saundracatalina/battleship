@@ -15,6 +15,11 @@ class Computer
     ships
   end
 
+  def horizontal_and_vertical_placements(ship)
+    generate_ship_coordinate_placement_horizontal(ship) +
+    generate_ship_coordinate_placement_vertical(ship)
+  end
+
   def generate_ship_coordinate_placement_horizontal(ship)
     possible_number_placements  = []
     (1..4).each_cons(ship.length) do |consec_nums|

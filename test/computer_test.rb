@@ -48,6 +48,12 @@ class ComputerTest < Minitest::Test
     ["A4", "B4", "C4"], ["B1", "C1", "D1"], ["B2", "C2", "D2"],
     ["B3", "C3", "D3"], ["B4", "C4", "D4"]]
     assert_equal expected, computer.generate_ship_coordinate_placement_vertical(ship1)
+    ship2 = Ship.new("Submarine",2)
+
+    expected = [["A1", "B1"], ["A2", "B2"], ["A3", "B3"], ["A4", "B4"],
+    ["B1", "C1"], ["B2", "C2"], ["B3", "C3"], ["B4", "C4"], ["C1", "D1"],
+    ["C2", "D2"], ["C3", "D3"], ["C4", "D4"]]
+    assert_equal expected, computer.generate_ship_coordinate_placement_vertical(ship2)
   end
 
 end

@@ -125,4 +125,13 @@ class Board
     "C #{@cells["C1"].render(show_ship)} #{@cells["C2"].render(show_ship)} #{@cells["C3"].render(show_ship)} #{@cells["C4"].render(show_ship)}\n" +
     "D #{@cells["D1"].render(show_ship)} #{@cells["D2"].render(show_ship)} #{@cells["D3"].render(show_ship)} #{@cells["D4"].render(show_ship)}\n"
   end
+
+  def verify_cells_not_fired_upon
+    untargeted = []
+    @cells.each do |coord, cell_obj|
+      untargeted << coord if cell_obj.fired_upon? == false
+    end
+    require "pry"; binding.pry
+    untargeted
+  end
 end

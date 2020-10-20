@@ -130,12 +130,13 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal false, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
   end
-  
+
   def test_board_render
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
     board.render
     board.render(true)
+    board.verify_cells_not_fired_upon
   end
 end

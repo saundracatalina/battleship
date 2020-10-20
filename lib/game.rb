@@ -1,5 +1,6 @@
 require './lib/computer'
 require './lib/user'
+require './lib/board'
 
 class Game
   def initialize
@@ -10,6 +11,7 @@ class Game
     inf_loop = false
     until inf_loop == true
       start_loop
+      @user_input = ""
       @computer = Computer.new
       @user = User.new
       @computer.place_ships
@@ -19,14 +21,24 @@ class Game
       puts @user.board.render(true)
       @user.place_ships
       display_boards
+      puts " "
       battle_loop
       end_game_display_boards
       winner_announcement
-      print "Fancy another round? ¯\_(ツ)_/¯ \n"
+      print "Fancy another round? ¯|_(ツ)_/¯ \n\n"
     end
   end
 
   def start_loop
+    until @user_input == "p" do
+      puts "Welcome to BATTLESHIP"
+      puts "Enter p to play. Enter q to quit."
+      get_user_input
+      interpret_user_input
+    end
+  end
+
+  def end_loop
     until @user_input == "p" do
       puts "Welcome to BATTLESHIP"
       puts "Enter p to play. Enter q to quit."
@@ -59,6 +71,7 @@ class Game
   def battle_loop
     until @computer.ships.all?{|ship| ship.sunk?} || @user.ships.all?{|ship| ship.sunk?}
       display_boards
+      puts " "
       @user.fire_shot(@computer)
       @computer.fire_shot(@user)
     end

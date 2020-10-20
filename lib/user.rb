@@ -25,7 +25,7 @@ class User
           if @board.valid_placement?(ship, user_input)
             valid_entry = true
             @board.place(ship, user_input)
-            print @board.render(true)
+            # print @board.render(true)
           else
             puts "Those are invalid coordinates. Please try again: "
           end
@@ -38,13 +38,22 @@ class User
     puts "Enter the coordinate for your shot:"
     until valid == true do
       coord = gets.chomp.upcase
-      if valid_coordinate?(coord)
+      if @board.valid_coordinate?(coord)
         if opponent.already_shot?(coord)
           puts "Please enter a valid coordinate. You've already shot there."
         else
           valid = true
+          # require "pry"; binding.pry
+          opponent.board.cells[coord].fire_upon
+          puts " "
+          puts "Your shot on #{coord} #{opponent.board.shot_impact(coord)}"
         end
-      end 
+      end
     end
   end
+
+  def verify_cells_not_fired_upon
+    @board.verify_cells_not_fired_upon
+  end
+
 end

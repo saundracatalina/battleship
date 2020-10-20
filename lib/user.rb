@@ -31,4 +31,22 @@ class User
       end
     end
   end
+
+  def fire_shot(opponent)
+    valid = false
+    puts "Enter the coordinate for your shot:"
+    until valid == true do
+      coord = gets.chomp.upcase
+      if valid_coordinate?(coord)
+        if opponent.already_shot?(coord)
+          puts "Please enter a valid coordinate. You've already shot there."
+        else
+          valid = true 
+        end
+    end
+  end
+
+  def is_fired_upon(coord)
+
+  end
 end

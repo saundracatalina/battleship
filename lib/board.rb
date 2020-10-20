@@ -138,4 +138,7 @@ class Board
     @cells[coord].report
   end
 
+  def already_shot?(coord)
+    @cells[coord].fired_upon?
+  end
 end

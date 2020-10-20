@@ -45,14 +45,6 @@ class Game
     puts "==============PLAYER BOARD=============="
     puts @user.board.render(true)
   end
-
-  def computer_take_shots
-
-  end
-
-  def user_take_shots
-
-  end
 end
 
 # Computer does not fire on the same spot twice

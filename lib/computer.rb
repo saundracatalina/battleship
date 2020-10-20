@@ -75,4 +75,13 @@ class Computer
     end
   end
 
+  def fire_shot(opponent)
+    cells_not_fired_upon = opponent.verify_cells_not_fired_upon
+    shot_coord = random_shot_selection(cells_not_fired_upon)
+    puts "My shot on #{shot_coord} #{opponent.board.shot_inpact(shot_coord)}"
+  end
+
+  def random_shot_selection(cells_not_fired_upon)
+    cells_not_fired_upon.sample
+  end
 end

@@ -1,3 +1,6 @@
+require './lib/computer'
+require './lib/user'
+
 class Game
   def initialize
     @user_input = ""

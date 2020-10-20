@@ -3,6 +3,7 @@ require './lib/board'
 
 class User
   attr_reader :ships, :board
+
   def initialize
     @ships = make_ships
     @board = Board.new
@@ -41,12 +42,9 @@ class User
         if opponent.already_shot?(coord)
           puts "Please enter a valid coordinate. You've already shot there."
         else
-          valid = true 
+          valid = true
         end
+      end 
     end
-  end
-
-  def is_fired_upon(coord)
-
   end
 end

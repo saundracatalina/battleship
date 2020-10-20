@@ -134,7 +134,7 @@ class Board
     untargeted
   end
 
-  def shot_inpact(coord)
+  def shot_impact(coord)
     @cells[coord].report
   end
 

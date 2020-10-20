@@ -141,6 +141,7 @@ class BoardTest < Minitest::Test
 
   def test_cells_not_fired_upon
     board = Board.new
-    assert_equal 16, board.verify_cells_not_fired_upon.count 
+    assert_equal 16, board.verify_cells_not_fired_upon.count
   end
+  #add test to test cell.count comes back as 15 after one is fired upon
 end

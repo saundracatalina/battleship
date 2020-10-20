@@ -36,4 +36,10 @@ class Cell
         end
       end
   end
+
+  def report
+    return "sunk a #{@ship.name}!" if render == "X"
+    return "was a hit!" if render == "H"
+    return "was a miss!" if render == "M"
+  end
 end

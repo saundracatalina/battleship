@@ -130,7 +130,7 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
     assert_equal false, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
   end
-  
+
   def test_board_render
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
@@ -138,4 +138,10 @@ class BoardTest < Minitest::Test
     board.render
     board.render(true)
   end
+
+  def test_cells_not_fired_upon
+    board = Board.new
+    assert_equal 16, board.verify_cells_not_fired_upon.count
+  end
+  #add test to test cell.count comes back as 15 after one is fired upon
 end

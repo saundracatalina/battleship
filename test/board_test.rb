@@ -137,6 +137,10 @@ class BoardTest < Minitest::Test
     board.place(cruiser, ["A1", "A2", "A3"])
     board.render
     board.render(true)
-    board.verify_cells_not_fired_upon
+  end
+
+  def test_cells_not_fired_upon
+    board = Board.new
+    assert_equal 16, board.verify_cells_not_fired_upon.count 
   end
 end

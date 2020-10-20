@@ -131,7 +131,6 @@ class Board
     @cells.each do |coord, cell_obj|
       untargeted << coord if cell_obj.fired_upon? == false
     end
-    require "pry"; binding.pry
     untargeted
   end
 end

@@ -102,11 +102,22 @@ class ComputerTest < Minitest::Test
     computer = Computer.new
     user = User.new
     coord = user.verify_cells_not_fired_upon
+
     assert user.verify_cells_not_fired_upon.include?(computer.random_shot_selection(coord))
+
     user.board.cells["A1"].fire_upon
     user.board.cells["A2"].fire_upon
-
     refute user.verify_cells_not_fired_upon.include?(computer.random_shot_selection(["A1", "A2"]))
   end
+
+  def test_already_shot
+    computer = Computer.new
+    refute computer.already_shot?("A1")
+    computer.board.cells["A1"].fire_upon
+    assert computer.already_shot?("A1")
+  end
+
+
+
 
 end

@@ -30,17 +30,20 @@ class Game
 
   def start_loop
     until @user_input == "p" do
-      puts "Welcome to BATTLESHIP"
-      puts "Enter p to play. Enter q to quit."
+      main_menu_message
       get_user_input
       interpret_user_input
     end
   end
 
+  def main_menu_message
+    puts "Welcome to BATTLESHIP"
+    puts "Enter p to play. Enter q to quit."
+  end
+
   def end_loop
     until @user_input == "p" do
-      puts "Welcome to BATTLESHIP"
-      puts "Enter p to play. Enter q to quit."
+      main_menu_message
       get_user_input
       interpret_user_input
     end
@@ -49,14 +52,13 @@ class Game
   def get_user_input
     @user_input = gets.chomp.downcase
   end
-#test
+
   def interpret_user_input
     if @user_input == "p"
       return ""
     elsif @user_input == "q"
       exit(true)
     else
-      #take puts off and test return
       puts "Please follow the instructions and try again!"
     end
   end
@@ -76,7 +78,7 @@ class Game
       @computer.fire_shot(@user)
     end
   end
-# test
+
   def winner_announcement
     if @computer.ships.all?{|ship| ship.sunk?}
       puts "You have defeated me!"

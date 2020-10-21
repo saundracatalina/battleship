@@ -87,6 +87,15 @@ class CellTest < Minitest::Test
     assert cell.fired_upon?
   end
 
+  def test_fire_upon
+    cell = Cell.new("A1")
+    ship = Ship.new("Titanic", 3)
+    cell.place_ship(ship)
+    cell.fire_upon
+    assert cell.fired_upon?
+    assert_equal 2, ship.health
+  end
+
   def test_report_returns_reports
     cell1 = Cell.new("A1")
     ship1 = Ship.new("Tugboat", 1)

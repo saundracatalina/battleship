@@ -2,8 +2,6 @@ require 'minitest/autorun'
 require 'minitest/pride'
 require './lib/ship'
 
-require 'pry'
-
 class ShipTest < Minitest::Test
   def test_it_exists_and_has_attributes
     cruiser = Ship.new("Cruiser", 3)

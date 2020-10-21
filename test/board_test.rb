@@ -10,6 +10,14 @@ class BoardTest < Minitest::Test
     assert_instance_of Board, board
   end
 
+  def test_baord_has_attribute
+    board = Board.new
+
+    assert board.cell_coordinates.all? {|cell_coord| assert Cell == Cell.new(cell_coord).class}
+    assert_equal 16, board.cells.keys.count
+    assert_equal 16, board.cells.values.count
+  end
+
   def test_board_make_column_coordinates
     board = Board.new
     assert_equal [1, 2, 3, 4], board.columns
@@ -26,16 +34,6 @@ class BoardTest < Minitest::Test
     assert_equal expected , board.cell_coordinates
   end
 
-  def test_baord_has_attribute
-      board = Board.new
-
-      board.cell_coordinates.each do |cell_coord|
-        Cell == Cell.new(cell_coord).class
-      end
-      assert_equal 16, board.cells.keys.count
-      assert_equal 16, board.cells.values.count
-  end
-
   def test_if_board_coordinates_are_valid
     board = Board.new
     assert board.valid_coordinate?("A1")
@@ -43,6 +41,44 @@ class BoardTest < Minitest::Test
     refute board.valid_coordinate?("A5")
     refute board.valid_coordinate?("E1")
     refute board.valid_coordinate?("A22")
+  end
+
+  def test_valid_length
+    board = Board.new
+    placement_range = ["A1", "A2", "A3", "A4"]
+    ship = Ship.new("Dragon Boat", 4)
+
+    assert board.valid_length?(ship, placement_range)
+
+    placement_range = ["A1", "A2", "A3"]
+    ship = Ship.new("Dragon Boat", 4)
+
+    refute board.valid_length?(ship, placement_range)
+  end
+
+  def test_all_coordinates_valid
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "A2", "A3", "A4"]
+    assert board.all_coordinates_valid?(ship, placement_range)
+
+    placement_range = ["A1", "B2", "A3", "A7"]
+    refute board.all_coordinates_valid?(ship, placement_range)
+  end
+
+  def test_valid_coordinate
+    board = Board.new
+    coord = "Z22"
+    refute board.valid_coordinate?(coord)
+
+    coord = "D1"
+    assert board.valid_coordinate?(coord)
+  end
+
+  def test_user_range
+    board = Board.new
+    assert_equal [1, 2, 3], board.user_range([1, 3])
+    assert_equal [1, 2], board.user_range([1, 1, 2])
   end
 
   def test_placement_coordinates_and_ship_length_equal
@@ -59,6 +95,14 @@ class BoardTest < Minitest::Test
 
     refute board.num_consec?(cruiser, ["A1", "A2", "A4"])
     refute board.num_consec?(cruiser, ["A3", "A2", "A1"])
+  end
+
+  def test_user_numbers
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "A2", "A6"]
+
+    assert_equal ["1", "2", "6"], board.user_numbers(ship, placement_range)
   end
 
   def test_placement_letters_are_consec

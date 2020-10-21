@@ -33,8 +33,6 @@ class Board
     ("A".."D").to_a
   end
 
-#End: Generate board
-#Start: Valid placement
   def valid_placement?(ship, placement_range)
     valid_length?(ship, placement_range) &&
     not_diagonal?(ship, placement_range) &&

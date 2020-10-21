@@ -117,7 +117,12 @@ class ComputerTest < Minitest::Test
     assert computer.already_shot?("A1")
   end
 
-
-
-
+# remove puts in computer file to run this test
+  def test_fire_shot
+    computer = Computer.new
+    user = User.new
+    expected = "My shot on C1 was a miss!".size
+    actual = (computer.fire_shot(user)).size
+    assert_equal expected, actual
+  end
 end

@@ -43,7 +43,6 @@ class User
           puts "Please enter a valid coordinate. You've already shot there."
         else
           valid = true
-          # require "pry"; binding.pry
           opponent.board.cells[coord].fire_upon
           puts " "
           puts "Your shot on #{coord} #{opponent.board.shot_impact(coord)}"

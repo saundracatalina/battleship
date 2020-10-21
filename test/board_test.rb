@@ -249,14 +249,18 @@ class BoardTest < Minitest::Test
     assert_equal false, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
   end
 
-  # def test_board_render
-  #   board = Board.new
-  #   cruiser = Ship.new("Cruiser", 3)
-  #   board.place(cruiser, ["A1", "A2", "A3"])
-  #
-  #   expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-  #   assert_equal expected, board.render
-  # end
+  def test_it_can_render_a_board
+    board = Board.new
+    expected = "  1 2 3 4 \nA . . . .\nB . . . .\nC . . . .\nD . . . .\n"
+
+    assert_equal expected, board.render
+
+    cruiser = Ship.new("Cruiser", 3)
+    expected = "  1 2 3 4 \nA S S S .\nB . . . .\nC . . . .\nD . . . .\n"
+    board.place(cruiser, ["A1", "A2", "A3"])
+    
+    assert_equal expected, board.render(true)
+  end
 
   def test_cells_not_fired_upon
     board = Board.new
@@ -282,5 +286,5 @@ class BoardTest < Minitest::Test
     board.cells["A1"].fire_upon
     assert_equal true, board.already_shot?(coord)
   end
-  
+
 end

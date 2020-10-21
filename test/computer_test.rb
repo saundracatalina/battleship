@@ -4,6 +4,7 @@ require './lib/ship'
 require './lib/cell'
 require './lib/board'
 require './lib/computer'
+require './lib/user'
 
 class ComputerTest < Minitest::Test
   def test_it_exists_and_has_attributes
@@ -95,6 +96,17 @@ class ComputerTest < Minitest::Test
     end
 
     assert_equal 5, expected
+  end
+
+  def test_random_shot_selection
+    computer = Computer.new
+    user = User.new
+    coord = user.verify_cells_not_fired_upon
+    assert user.verify_cells_not_fired_upon.include?(computer.random_shot_selection(coord))
+    user.board.cells["A1"].fire_upon
+    user.board.cells["A2"].fire_upon
+
+    refute user.verify_cells_not_fired_upon.include?(computer.random_shot_selection(["A1", "A2"]))
   end
 
 end

@@ -10,6 +10,7 @@ class UserTest < Minitest::Test
 
   def test_it_exists_and_has_attributes
     user = User.new
+
     assert_instance_of User, user
 
     user.ships.each do |ship|
@@ -24,6 +25,7 @@ class UserTest < Minitest::Test
     user.ships.each do |ship|
       assert Ship, ship.class
     end
+
     assert_equal "Submarine", user.ships[1].name
     assert_equal "Cruiser", user.ships[0].name
   end
@@ -37,6 +39,7 @@ class UserTest < Minitest::Test
 
     user.board.cells["A1"].fire_upon
     user.board.cells["A2"].fire_upon
+
     refute user.verify_cells_not_fired_upon.include?(computer.random_shot_selection(["A1", "A2"]))
   end
 end

@@ -7,6 +7,7 @@ require './lib/board'
 class BoardTest < Minitest::Test
   def test_it_exist
     board = Board.new
+
     assert_instance_of Board, board
   end
 
@@ -20,22 +21,26 @@ class BoardTest < Minitest::Test
 
   def test_board_make_column_coordinates
     board = Board.new
+
     assert_equal [1, 2, 3, 4], board.columns
   end
 
   def test_board_make_rows_coordinates
     board = Board.new
+
     assert_equal ["A", "B", "C", "D"], board.rows
   end
 
   def test_board_can_make_call_coordinates
     board = Board.new
     expected = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4", "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+
     assert_equal expected , board.cell_coordinates
   end
 
   def test_if_board_coordinates_are_valid
     board = Board.new
+
     assert board.valid_coordinate?("A1")
     assert board.valid_coordinate?("D4")
     refute board.valid_coordinate?("A5")
@@ -77,6 +82,7 @@ class BoardTest < Minitest::Test
 
   def test_user_range
     board = Board.new
+
     assert_equal [1, 2, 3], board.user_range([1, 3])
     assert_equal [1, 2], board.user_range([1, 1, 2])
   end
@@ -85,6 +91,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
+
     refute board.valid_placement?(cruiser, ["A1", "A2"])
     refute board.valid_placement?(submarine, ["A2", "A3", "A4"])
   end
@@ -226,6 +233,7 @@ class BoardTest < Minitest::Test
     cell_1 = board.cells["A1"]
     cell_2 = board.cells["A2"]
     cell_3 = board.cells["A3"]
+
     assert_equal cruiser, cell_1.ship
     assert_equal cruiser, cell_2.ship
     assert_equal cruiser, cell_3.ship
@@ -244,8 +252,11 @@ class BoardTest < Minitest::Test
   def test_cell_empty?
     board = Board.new
     cruiser = Ship.new("Cruiser", 3)
+
     assert_equal true, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
+
     board.place(cruiser, ["A1", "A2", "A3"])
+
     assert_equal false, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
   end
 
@@ -256,16 +267,19 @@ class BoardTest < Minitest::Test
     assert_equal expected, board.render
 
     cruiser = Ship.new("Cruiser", 3)
-    expected = "  1 2 3 4 \nA S S S .\nB . . . .\nC . . . .\nD . . . .\n"
     board.place(cruiser, ["A1", "A2", "A3"])
-    
+    expected = "  1 2 3 4 \nA S S S .\nB . . . .\nC . . . .\nD . . . .\n"
+
     assert_equal expected, board.render(true)
   end
 
   def test_cells_not_fired_upon
     board = Board.new
+
     assert_equal 16, board.verify_cells_not_fired_upon.count
+
     board.cells["A1"].fire_upon
+
     assert_equal 15, board.verify_cells_not_fired_upon.count
   end
 
@@ -284,7 +298,7 @@ class BoardTest < Minitest::Test
     assert_equal false, board.already_shot?(coord)
 
     board.cells["A1"].fire_upon
+
     assert_equal true, board.already_shot?(coord)
   end
-
 end

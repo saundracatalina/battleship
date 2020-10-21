@@ -113,6 +113,80 @@ class BoardTest < Minitest::Test
     refute board.letter_consec?(submarine, ["C1", "B1"])
   end
 
+  def test_letters_to_num
+    board = Board.new
+    placement_range = ["A", "B", "C"]
+    ship = ship
+
+    assert_equal [65, 66, 67], board.letters_to_num(ship, placement_range)
+  end
+
+  def test_user_letters
+    board = Board.new
+    placement_range = ["A4", "B4", "C4"]
+    ship = ship
+
+    assert_equal ["A", "B", "C"], board.user_letters(ship, placement_range)
+  end
+
+  def test_identical_num
+    board = Board.new
+    ship = ship
+    placement_range = ["A4", "B4", "C4"]
+
+    assert board.identical_num(ship, placement_range)
+  end
+
+  def test_identical_letter
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "A2", "A3"]
+    assert board.identical_letter(ship, placement_range)
+  end
+
+  def test_not_diagonal
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "A2", "A3"]
+
+    assert board.not_diagonal?(ship, placement_range)
+
+    placement_range = ["A1", "B2", "C3"]
+    refute board.not_diagonal?(ship, placement_range)
+  end
+
+  def test_vertical_placement
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "B1", "C2"]
+    assert_equal false, board.vertical_placement(ship, placement_range)
+
+    placement_range = ["A1", "B1", "C1"]
+    assert_equal true, board.vertical_placement(ship, placement_range)
+  end
+
+  def test_horizontal_placement
+    board = Board.new
+    ship = ship
+    placement_range = ["A1", "A2", "C3"]
+
+    assert_equal false, board.horizontal_placement(ship, placement_range)
+
+    placement_range = ["A1", "A2", "A3"]
+    assert_equal true, board.horizontal_placement(ship, placement_range)
+  end
+
+  def test_board_can_place_ships
+    board = Board.new
+    ship = Ship.new("Tri Ship", 3)
+    placement_range = ["A1", "A2", "A3"]
+    board.place(ship, placement_range)
+
+    assert_equal ship ,board.cells["A1"].ship
+    assert_equal ship ,board.cells["A2"].ship
+    assert_equal ship ,board.cells["A3"].ship
+  end
+
   def test_board_will_not_place_diagonal_placements
     cruiser = Ship.new("Cruiser", 3)
     submarine = Ship.new("Submarine", 2)
@@ -175,17 +249,38 @@ class BoardTest < Minitest::Test
     assert_equal false, board.cell_empty?(cruiser, ["A1", "A2", "A3"])
   end
 
-  def test_board_render
-    board = Board.new
-    cruiser = Ship.new("Cruiser", 3)
-    board.place(cruiser, ["A1", "A2", "A3"])
-    board.render
-    board.render(true)
-  end
+  # def test_board_render
+  #   board = Board.new
+  #   cruiser = Ship.new("Cruiser", 3)
+  #   board.place(cruiser, ["A1", "A2", "A3"])
+  #
+  #   expected = "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
+  #   assert_equal expected, board.render
+  # end
 
   def test_cells_not_fired_upon
     board = Board.new
     assert_equal 16, board.verify_cells_not_fired_upon.count
+    board.cells["A1"].fire_upon
+    assert_equal 15, board.verify_cells_not_fired_upon.count
   end
-  #add test to test cell.count comes back as 15 after one is fired upon
+
+  def test_shot_impact
+    board = Board.new
+    coord = "A1"
+    board.cells["A1"].fire_upon
+
+    assert_equal "was a miss!", board.shot_impact(coord)
+  end
+
+  def test_already_shot
+    board = Board.new
+    coord = "A1"
+
+    assert_equal false, board.already_shot?(coord)
+
+    board.cells["A1"].fire_upon
+    assert_equal true, board.already_shot?(coord)
+  end
+  
 end

@@ -25,7 +25,7 @@ class User
           if @board.valid_placement?(ship, user_input)
             valid_entry = true
             @board.place(ship, user_input)
-            # print @board.render(true)
+            print @board.render(true)
           else
             puts "Those are invalid coordinates. Please try again: "
           end
@@ -48,6 +48,8 @@ class User
           puts " "
           puts "Your shot on #{coord} #{opponent.board.shot_impact(coord)}"
         end
+      else
+        puts "#{coord} is invalid. Please try again: "
       end
     end
   end

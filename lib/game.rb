@@ -20,7 +20,6 @@ class Game
       puts "The Cruiser is three units long and the Submarine is two units long.\n"
       puts @user.board.render(true)
       @user.place_ships
-      display_boards
       puts " "
       battle_loop
       end_game_display_boards
@@ -50,13 +49,14 @@ class Game
   def get_user_input
     @user_input = gets.chomp.downcase
   end
-
+#test
   def interpret_user_input
     if @user_input == "p"
       return ""
     elsif @user_input == "q"
       exit(true)
     else
+      #take puts off and test return
       puts "Please follow the instructions and try again!"
     end
   end
@@ -76,7 +76,7 @@ class Game
       @computer.fire_shot(@user)
     end
   end
-
+# test
   def winner_announcement
     if @computer.ships.all?{|ship| ship.sunk?}
       puts "You have defeated me!"
@@ -92,16 +92,3 @@ class Game
     puts @user.board.render(true)
   end
 end
-
-# Computer does not fire on the same spot twice
-# User can choose a valid coordinate to fire on
-# Entering invalid coordinate prompts user to enter valid coordinate
-# Both computer and player shots are reported as a hit, sink, or miss
-# User is informed when they have already fired on a coordinate
-# Board is updated after a turn
-# End Game:
-#
-# Game ends when all the user’s ships are sunk
-# Game ends when all the computer’s ships are sunk
-# Game reports who won
-# Game returns user back to the Main Menu

@@ -87,6 +87,7 @@ class Computer
   end
 
   def already_shot?(coordinate)
+    # require "pry"; binding.pry
     @board.cells[coordinate].fired_upon?
   end
 end

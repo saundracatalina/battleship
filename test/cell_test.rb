@@ -65,7 +65,43 @@ class CellTest < Minitest::Test
     assert_equal "X", cell_2.render
   end
 
-  # def test_report
-  #
-  # end
+  def test_cell_empty?
+    cell = Cell.new("A1")
+    ship = Ship.new("Cruiser", 3)
+    assert cell.empty?
+    cell.place_ship(ship)
+    assert_equal false, cell.empty?
+  end
+
+  def test_cell_can_place_ship
+    cell = Cell.new("A1")
+    ship = Ship.new("Titanic", 3)
+    cell.place_ship(ship)
+    assert_equal ship, cell.ship
+  end
+
+  def test_fired_upon?
+    cell = Cell.new("A1")
+    refute cell.fired_upon?
+    cell.fire_upon
+    assert cell.fired_upon?
+  end
+
+  def test_report_returns_reports
+    cell1 = Cell.new("A1")
+    ship1 = Ship.new("Tugboat", 1)
+    cell1.place_ship(ship1)
+    cell1.fire_upon
+    assert_equal "X", cell1.render
+
+    cell2 = Cell.new("A1")
+    ship2 = Ship.new("Tugboat", 2)
+    cell2.place_ship(ship2)
+    cell2.fire_upon
+    assert_equal "H", cell2.render
+    cell3 = Cell.new("A1")
+    cell3.fire_upon
+    assert_equal "M", cell3.render
+  end
+
 end

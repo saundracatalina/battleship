@@ -20,7 +20,6 @@ class Game
       puts "The Cruiser is three units long and the Submarine is two units long.\n"
       puts @user.board.render(true)
       @user.place_ships
-      display_boards
       puts " "
       battle_loop
       end_game_display_boards
